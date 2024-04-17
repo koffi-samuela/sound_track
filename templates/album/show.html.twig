@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Album{% endblock %}
+
+{% block body %}
+    <h1>Album</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ album.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ album.title }}</td>
+            </tr>
+            <tr>
+                <th>Release_date</th>
+                <td>{{ album.releaseDate ? album.releaseDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Artist</th>
+                <td>{{ album.artist }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="album_song container">
+            <h5 class="text-center">Les sons de l'album </h5>
+            <div class="row my-4"  id='songList'>
+                {% for song in songs %}
+                    <div class="col-3 mx-2 my-4 text-center">
+                        <div class="card">
+                            <h6 class="card-title">
+                               Titre : {{ song.title }}
+                            </h6>
+                            <p class="card-text">
+                            Durée : {{ song.duration }}s
+
+                            </p>
+                        </div>
+                    </div>
+                    
+                {% endfor %}
+            
+            </div>
+             <div class="row my-4"  id='songList'>
+                    <h5 class="text-center">Les commentaires de cet album </h5>
+                {% for comment in comments %}
+                    <div class="col-3 mx-2 my-4 text-center">
+                        <div class="card">
+                            <h6 class="card-title">
+                               Titre : 
+                               {{ comment.content }}
+                            </h6>
+                            <p class="card-text">
+                           {# Durée : {{ comment.Created_at|date('d/m/Y à H:i') }} #}
+                           Durée : {{ comment.CreatedAt|date('d/m/Y à H:i') }}
+                            </p>
+                            <p>
+                            {{ include('./comment/_delete_form.html.twig') }}                            
+                            </p>
+                        </div>
+                    </div>
+                {% else %}
+                <p> Aucun commentaire pour cet album </p>
+                    
+                {% endfor %}
+                    
+            
+            </div>
+                    <a href="{{path('app_add_comment', {'album_id': album.id})}}" class="btn btn-primary" > Ajouter un commentaire</a>
+    </div>
+
+    <a href="{{ path('app_album_index') }}">back to list</a>
+
+    <a href="{{ path('app_album_edit', {'id': album.id}) }}">edit</a>
+
+    {{ include('album/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<div class="home container">
+    <h1 class="text-center">BIENVENUE SUR NOTRE SITE</h1>
+    <div class="user_action d-flex justify-content-center gap-4">
+        <a class="btn btn-primary" href="{{path('app_login')}}">Connexion</a>
+        <a class="btn btn-primary" href="{{path('app_register')}}">Inscription</a>
+    </div>
+    {% if app.user %}
+        <p class="fw-bold">Bonjour {{app.user.email}} </p>
+            {# {{ dump(app.user) }} #}
+    {% endif %}
+    <div class="action_pages my-4">
+            <h5> Decouvrez nos albums ici</h5>
+            <div class="user_action d-flex justify-content-center gap-4">
+                        <a class="btn btn-danger" href="{{path('app_album_index')}}">Nos albums</a>
+            </div>
+            
+    </div>
+</div>
+{% endblock %}

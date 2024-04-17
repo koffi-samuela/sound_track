@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AddCommentController!{% endblock %}
+
+{% block body %}
+<h4>Ajouter un commentaire</h4>
+{% if app.user %}
+<form action="" method="post" class="container">
+    <label for="content">Commentaire : </label>
+    <textarea rows="5" cols="30" class="form-control"i d="content" name="content"></textarea><br/>
+    <button type="submit" class="btn btn-primary">Envoyer</button>
+</form>
+{% else %}
+    <p>Vous devez vous connecter pour laisser un commentaire</p>
+{% endif %}
+{% endblock %}
